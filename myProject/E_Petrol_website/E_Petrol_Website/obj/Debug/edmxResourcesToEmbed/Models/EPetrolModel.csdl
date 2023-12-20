@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EPetrolDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Balance">
+    <Key>
+      <PropertyRef Name="BalanceID" />
+    </Key>
+    <Property Name="BalanceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerID" Type="Int32" Nullable="false" />
+    <Property Name="TotalQuantity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_Balances_Customers" FromRole="Balances" ToRole="Customers" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MobileNumber" Type="Int64" />
+    <Property Name="ResidencePlace" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SmartCardNumber" Type="Int64" Nullable="false" />
+    <Property Name="VehicleNumber" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Balances" Relationship="Self.FK_Balances_Customers" FromRole="Customers" ToRole="Balances" />
+    <NavigationProperty Name="Withdraws" Relationship="Self.FK_Withdraws_Customers" FromRole="Customers" ToRole="Withdraws" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Withdraw">
+    <Key>
+      <PropertyRef Name="WithdrawID" />
+    </Key>
+    <Property Name="WithdrawID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerID" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="IsFree" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_Withdraws_Customers" FromRole="Withdraws" ToRole="Customers" />
+  </EntityType>
+  <Association Name="FK_Balances_Customers">
+    <End Role="Customers" Type="Self.Customer" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Balances" Type="Self.Balance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="Balances">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Withdraws_Customers">
+    <End Role="Customers" Type="Self.Customer" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Withdraws" Type="Self.Withdraw" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="Withdraws">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EPetrolDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Balances" EntityType="Self.Balance" />
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="Withdraws" EntityType="Self.Withdraw" />
+    <AssociationSet Name="FK_Balances_Customers" Association="Self.FK_Balances_Customers">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Balances" EntitySet="Balances" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Withdraws_Customers" Association="Self.FK_Withdraws_Customers">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Withdraws" EntitySet="Withdraws" />
+    </AssociationSet>
+    <EntitySet Name="CompanyNames" EntityType="EPetrolDBModel.CompanyName" />
+  </EntityContainer>
+  <EntityType Name="CompanyName">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+</Schema>

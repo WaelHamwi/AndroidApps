@@ -1,0 +1,57 @@
+﻿@model IEnumerable<E_Petrol_Website.Models.ReportItem>
+
+@{
+    ViewBag.Title = "IssueReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (Session["login"] == null)
+{
+    Response.Redirect("Login");
+}
+@if (Session["role"] != null)
+{
+    int role = (Int32)Session["role"];
+
+    if (role != 1)
+    {
+        Response.Redirect("Login");
+    }
+}
+<h2>Report</h2>
+
+<p>
+</p>
+<table class="table table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.customerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.vehicleNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.freeWithdrown)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.balanceWithdrown)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.customerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.vehicleNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.freeWithdrown)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.balanceWithdrown)
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_activity"
+        android:layout_height="match_parent"
+        tools:context=".NewCustomerActivity">
+
+    <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:id="@+id/edtFullName"
+              android:layout_weight="1"
+              android:hint="FullName"/>
+    <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:inputType="number"
+              android:id="@+id/edtSmartCardNumber"
+              android:layout_weight="1"
+              android:hint="Smart Card Number"/>
+    <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:id="@+id/edtVehicleNumber"
+              android:inputType="number"
+              android:layout_weight="1"
+              android:hint="Vehicle Number"/>
+    <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:id="@+id/edtAddress"
+              android:layout_weight="1"
+              android:hint="Address"/>
+    <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:id="@+id/edtResidencePlace"
+              android:layout_weight="1"
+              android:hint="Residence Place"/>
+    <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:id="@+id/edtMobileNumber"
+              android:inputType="number"
+              android:layout_weight="1"
+              android:hint="Mobile Number"/>
+
+    <Button android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:id="@+id/btnSaveCustomer"
+    android:layout_weight="1"
+    android:text="Save"/>
+
+</LinearLayout>

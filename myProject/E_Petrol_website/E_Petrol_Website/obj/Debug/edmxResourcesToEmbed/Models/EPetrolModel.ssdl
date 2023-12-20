@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EPetrolDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Balances">
+    <Key>
+      <PropertyRef Name="BalanceID" />
+    </Key>
+    <Property Name="BalanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerID" Type="int" Nullable="false" />
+    <Property Name="TotalQuantity" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CompanyName">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MobileNumber" Type="bigint" />
+    <Property Name="ResidencePlace" Type="ntext" />
+    <Property Name="Address" Type="ntext" />
+    <Property Name="Photo" Type="varchar" MaxLength="50" />
+    <Property Name="SmartCardNumber" Type="bigint" Nullable="false" />
+    <Property Name="VehicleNumber" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Withdraws">
+    <Key>
+      <PropertyRef Name="WithdrawID" />
+    </Key>
+    <Property Name="WithdrawID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerID" Type="int" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="IsFree" Type="char" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Balances_Customers">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Balances" Type="Self.Balances" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="Balances">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Withdraws_Customers">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Withdraws" Type="Self.Withdraws" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="Withdraws">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EPetrolDBModelStoreContainer">
+    <EntitySet Name="Balances" EntityType="Self.Balances" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CompanyName" EntityType="Self.CompanyName" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Withdraws" EntityType="Self.Withdraws" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Balances_Customers" Association="Self.FK_Balances_Customers">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Balances" EntitySet="Balances" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Withdraws_Customers" Association="Self.FK_Withdraws_Customers">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Withdraws" EntitySet="Withdraws" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

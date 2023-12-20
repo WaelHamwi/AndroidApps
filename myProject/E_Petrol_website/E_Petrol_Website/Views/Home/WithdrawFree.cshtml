@@ -1,0 +1,127 @@
+﻿@model E_Petrol_Website.Models.Customer
+@{
+    ViewBag.Title = "WithdrawFree";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (Session["login"] == null)
+{
+    Response.Redirect("Login");
+}
+@if (Session["role"] != null)
+{
+    int role = (Int32)Session["role"];
+
+    if (role != 2)
+    {
+        Response.Redirect("Login");
+    }
+}
+<h2>Withdraw Free</h2>
+
+<div>
+    <h4 class="text-warning">@Model.FullName Information</h4>
+    <hr />
+    @using (Html.BeginForm("WithdrawFree", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <img src="~/@Html.DisplayFor(model => model.Photo)" width="80px" class="img-rounded" height="80px" />
+
+        <table class="table">
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.FullName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.FullName)
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.MobileNumber)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.MobileNumber)
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.ResidencePlace)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.ResidencePlace)
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.Address)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.Address)
+                </td>
+            </tr>
+
+
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.SmartCardNumber)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.SmartCardNumber)
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.VehicleNumber)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(model => model.VehicleNumber)
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Amount
+                </td>
+
+                <td>
+                    <input type="number" name="amount" required />
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    
+                </td>
+
+                <td>
+                    <input class="btn btn-danger" type="submit" value="Save" />
+
+                </td>
+            </tr>
+        </table>
+
+        @Html.Hidden("smartCardNumber", new { value = ViewBag.smartCardNumber })
+
+
+       
+
+    }
+</div>
+<p>
+    @if (ViewBag.Message != null)
+    {
+        <h2>@ViewBag.Message</h2>
+    }
+
+
+</p>

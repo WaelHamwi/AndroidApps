@@ -1,0 +1,80 @@
+﻿@model IEnumerable<E_Petrol_Website.Models.Customer>
+
+@{
+    ViewBag.Title = "AllCustomers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AllCustomers</h2>
+@if (Session["login"]==null)
+{
+    Response.Redirect("Login");
+}
+@if (Session["role"] != null)
+{
+    int role = (Int32)Session["role"];
+
+    if (role != 1)
+    {
+        Response.Redirect("Login");
+    }
+}
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MobileNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ResidencePlace)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Photo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SmartCardNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VehicleNumber)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MobileNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ResidencePlace)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+           <img src="~/@Html.DisplayFor(modelItem => item.Photo)" width="100px" height="100px" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SmartCardNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VehicleNumber)
+        </td>
+        <td>
+            @Html.ActionLink("Delete", "Delete", new { id=item.CustomerID })
+        </td>
+    </tr>
+}
+
+</table>

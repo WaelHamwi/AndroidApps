@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:background="@color/grey3"
+              android:orientation="vertical"
+              android:layout_margin="@dimen/item_margin"
+              android:padding="@dimen/padding_activity"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="wrap_content">
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+
+                  android:textStyle="bold"
+                  android:text="name"
+                  android:id="@+id/txtCustomerName" android:layout_weight="1"/>
+
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+
+                  android:text="vehicle Number"
+                  android:textStyle="bold"
+                  android:id="@+id/txtVehicleNumber" android:layout_weight="1"/>
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:text="Free Petrol Withdrawn"  />
+
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:textColor="@android:color/holo_green_dark"
+                  android:layout_weight="1"
+                  android:layout_gravity="right"
+                  android:id="@+id/txtFreePetrolWithdrawn" />
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:text="Balance Withdrawn" />
+
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:textColor="@android:color/holo_blue_dark"
+                  android:layout_weight="1"
+                  android:layout_gravity="right"
+                  android:id="@+id/txtBalanceWithdrawn" />
+    </LinearLayout>
+
+
+
+</LinearLayout>

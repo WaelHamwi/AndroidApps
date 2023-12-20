@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div>
+    @if (Session["role"] != null)
+    {
+        int role = (Int32)Session["role"];
+
+        if (role == 1)
+        {
+            Response.Redirect("AdminHome");
+        }else if (role == 2)
+        {
+            Response.Redirect("EmployeeHome");
+        }else if (role == 3)
+        {
+            Response.Redirect("CustomerHome");
+        }
+    }
+    <h2>
+        Login
+    </h2>
+    <form method="post" action="">
+
+         
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input id="email" type="text" class="form-control" name="username" placeholder="Username/Full name">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    <input id="password" type="password" class="form-control" name="password" placeholder="Password/Card Number">
+                </div>
+            <br>
+
+            <input value="Login" type="submit" class="btn btn-info btn-lg btn-block" />
+
+    </form>
+    <br />
+
+    @if (ViewBag.error != null)
+    { <p>The user name or password is wrong </p>}
+</div>
+

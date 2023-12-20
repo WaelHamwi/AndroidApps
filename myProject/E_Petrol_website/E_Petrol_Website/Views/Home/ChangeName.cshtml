@@ -1,0 +1,43 @@
+﻿@model E_Petrol_Website.Models.CompanyName
+
+@{
+    ViewBag.Title = "ChangeName";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (Session["login"] == null)
+{
+    Response.Redirect("Login");
+}
+@if (Session["role"] != null)
+{
+    int role = (Int32)Session["role"];
+
+    if (role != 1)
+    {
+        Response.Redirect("Login");
+    }
+}
+<h2>Change Name</h2>
+
+<div>
+    <hr />
+    @using (Html.BeginForm("ChangeName", "Home",FormMethod.Post))
+    {
+    <dl class="dl-horizontal">
+        <dt>
+            Company Name
+        </dt>
+
+        <dd>
+            <input type="text" value="@Model.Name" name="name" />
+        </dd>
+
+    </dl>
+
+    <input type="submit" value="Save Changes" class="btn btn-block" />
+    }
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

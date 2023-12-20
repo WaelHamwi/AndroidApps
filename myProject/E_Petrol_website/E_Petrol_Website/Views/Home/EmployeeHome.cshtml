@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "EmployeeHome";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (Session["login"] == null)
+{
+    Response.Redirect("Login");
+}
+@if (Session["role"] != null)
+{
+    int role = (Int32)Session["role"];
+
+    if (role != 2)
+    {
+        Response.Redirect("Login");
+    }
+}
+<h2>Employee</h2>
+
+
+<table class="table table-hover">
+    <tr>
+        <th>  Smart Card Number </th>
+    </tr>
+
+
+    @{
+        var cards = (List<long>)ViewBag.SmartCardNumbers;
+
+        foreach (var item in cards)
+        {
+            <tr>
+                <td> @item </td>
+
+                <td>
+                    @Html.ActionLink("More Information", "WithdrawBalance", "Home",new { smartCardNumber = item },null)
+                </td>
+
+
+            </tr>
+        }
+    }
+</table>

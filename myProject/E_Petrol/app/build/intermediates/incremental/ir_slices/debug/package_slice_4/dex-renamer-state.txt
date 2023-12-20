@@ -1,0 +1,4 @@
+#Tue Nov 26 21:44:59 EET 2019
+base.0=D\:\\MWS\\S19\\MWT\\WMS\\1\\E_Petrol\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\4
+path.0=classes.dex
+renamed.0=classes.dex

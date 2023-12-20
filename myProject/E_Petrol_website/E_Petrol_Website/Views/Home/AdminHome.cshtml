@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "AdminHome";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (Session["role"] != null)
+{
+    int role = (Int32)Session["role"];
+
+    if (role != 1)
+    {
+        Response.Redirect("Login");
+    }
+}
+<div style="text-align:center">
+    <h2>Administrator</h2>
+
+    <h4> @Html.ActionLink("Add New Customer", "CreateCustomer", "Home")</h4>
+    <h4> @Html.ActionLink("View Report", "IssueReport", "Home")</h4>
+    <h4> @Html.ActionLink("Change Name", "ChangeName", "Home")</h4>
+    <h4> @Html.ActionLink("Customers", "AllCustomers", "Home")</h4>
+</div>

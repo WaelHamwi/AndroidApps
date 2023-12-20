@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewBag.Title = "CreateCustomer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Customer Information</h2>
+@if (Session["login"] == null)
+{
+    Response.Redirect("Login");
+}
+@if (Session["role"] != null)
+{
+    int role = (Int32)Session["role"];
+
+    if (role != 1)
+    {
+        Response.Redirect("Login");
+    }
+}
+
+<div>
+    <hr />
+    @using (Html.BeginForm("CreateCustomer", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div>
+        <table class="table">
+            <tr>
+                <td> Full Name</td>
+                <td> <input type="text" name="fullName" required /></td>
+
+            </tr>
+            <tr>
+                <td>       Smart Card Number </td>
+                <td> <input type="text" name="smartCardNumber"  required/></td>
+
+            </tr>
+            <tr>
+                <td>      Address </td>
+                <td> <input type="text" name="address" required /></td>
+
+            </tr>
+            <tr>
+                <td>    Residence Place </td>
+                <td><input type="text" name="residencePlace" required /></td>
+
+            </tr>
+            <tr>
+                <td>   Vehicle Number </td>
+                <td><input type="number" name="vehicleNumber" required /></td>
+
+            </tr>
+            <tr>
+                <td>   Moblile Number </td>
+                <td><input type="number" name="mobileNumber" required /></td>
+
+            </tr>
+            
+            <tr>
+                <td>       Photo  </td>
+                <td><input type="file" name="photo" required /></td>
+
+            </tr>
+
+        </table>
+
+        <br />
+        <input type="submit" class="btn btn-block btn-info text-center" value="Save" />
+
+
+
+    </div>
+    }
+    <hr />
+
+    <br />
+
+    <br />
+    @if (ViewBag.Message != null)
+    { <p>@ViewBag.Message </p>}
+</div>
